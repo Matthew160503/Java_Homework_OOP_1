@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 import Units.BaseHero;
 import Units.Crossbowman;
@@ -11,33 +12,46 @@ import Units.Spearman;
 
 public class Main{
     public static void main(String[] args) {
-        Crossbowman crossbowman1 = new Crossbowman();
-        Magician magician1 = new Magician();
-        Monk monk1 = new Monk();
-        Peasant peasant1 = new Peasant();
-        Robber robber1 = new Robber();
-        Sniper sniper1 = new Sniper();
-        Spearman spearman1 = new Spearman();
-        
-        // System.out.println(crossbowman1.getInfo());
-        // System.out.println(magician1.getInfo());
-        // System.out.println(monk1.getInfo());
-        // System.out.println(peasant1.getInfo());
-        // System.out.println(robber1.getInfo());
-        // System.out.println(sniper1.getInfo());
-        // System.out.println(spearman1.getInfo());
+        ArrayList<BaseHero> team1 = new ArrayList<>();
+        ArrayList<BaseHero> team2 = new ArrayList<>();
 
-        ArrayList<BaseHero> library = new ArrayList<>();
-        library.add(crossbowman1);
-        library.add(magician1);
-        library.add(monk1);
-        library.add(peasant1);
-        library.add(robber1);
-        library.add(sniper1);
-        library.add(spearman1);
+        for(int i = 0; i < 10; i++){
+            switch(new Random().nextInt(4)){
+                case 0:
+                    team1.add(new Crossbowman());
+                    break;
+                case 1:
+                    team1.add(new Magician());
+                    break;
+                case 2:
+                    team1.add(new Robber());
+                    break;
+                default:
+                    team1.add(new Peasant());
+                    break;
 
-        for(BaseHero person : library){
-            System.out.println(person.getInfo());
+            }
+
+            switch(new Random().nextInt(4)){
+                case 0:
+                    team2.add(new Sniper());
+                    break;
+                case 1:
+                    team2.add(new Monk());
+                    break;
+                case 2:
+                    team2.add(new Spearman());
+                    break;
+                default:
+                    team2.add(new Peasant());
+                    break;
+
+            }
         }
+
+        System.out.println("\nTeam1:");
+        for(BaseHero hero1: team1) System.out.println(hero1.getInfo());
+        System.out.println("\nTeam2:");
+        for(BaseHero hero2: team2) System.out.println(hero2.getInfo());
     }
 }

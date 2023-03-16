@@ -12,8 +12,15 @@ public class Spearman extends BaseHero{
         this.armor = maxArmor;
     }
 
+    @Override
     public String getInfo() {
-        return String.format("%s  Armor: %d", super.getInfo(), this.armor);
+        return "Spearman";
     }
+
+    @Override
+    public void step() {
+        System.out.println("Spearmans step");
+    }
+    
     
 }

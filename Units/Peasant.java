@@ -15,8 +15,16 @@ public class Peasant extends BaseHero{
         this.money = maxMoney;
     }
 
+    @Override
     public String getInfo() {
-        return String.format("%s  Money: %d  Food: %d", super.getInfo(), this.money, this.food);
+        return "Peasant";
     }
+
+    @Override
+    public void step() {
+        System.out.println("Peasants step");
+    }
+
+    
     
 }

@@ -12,7 +12,14 @@ public class Robber extends BaseHero {
         this.destruction = maxDestruction;
     }
     
+    @Override
     public String getInfo() {
-        return String.format("%s  Destruction: %d", super.getInfo(), this.destruction);
+        return "Robber";
     }
+
+    @Override
+    public void step() {
+        System.out.println("Robbers step");
+    }
+    
 }

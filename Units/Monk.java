@@ -12,7 +12,15 @@ public class Monk extends BaseHero {
         this.elixir = maxElixir;
     }
     
+    @Override
     public String getInfo() {
-        return String.format("%s  Elixir: %d", super.getInfo(), this.elixir);
+        return "Monk";
     }
+
+    @Override
+    public void step() {
+        System.out.println("Monks step");
+    }
+
+    
 }

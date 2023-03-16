@@ -12,7 +12,15 @@ public class Crossbowman extends BaseHero {
         this.arrows = maxArrows;
     }
     
+    @Override
     public String getInfo() {
-        return String.format("%s  Arrows: %d", super.getInfo(), this.arrows);
+        return "Crossbowman";
     }
+
+    @Override
+    public void step() {
+        System.out.println("Hero step");
+    }
+    
+
 }

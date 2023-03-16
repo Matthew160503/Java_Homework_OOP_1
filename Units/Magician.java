@@ -12,11 +12,15 @@ public class Magician extends BaseHero {
         this.mana = maxMana;
     }
 
+    @Override
     public String getInfo() {
-        return String.format("%s  Mana: %d",super.getInfo(), this.mana);
+        return "Magician";
     }
 
-    // public void useMana(int mana, int maxMana){
-        
-    // }
+    @Override
+    public void step() {
+        System.out.println("Magicians step");
+    }
+
+    
 }

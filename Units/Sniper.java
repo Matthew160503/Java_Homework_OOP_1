@@ -1,6 +1,6 @@
 package Units;
 
-public class Sniper extends BaseHero {
+public class Sniper extends BaseHero{
 
     private int bullets;
     private int maxBullets;
@@ -12,7 +12,16 @@ public class Sniper extends BaseHero {
         this.bullets = maxBullets;
     }
     
+    @Override
     public String getInfo() {
-        return String.format("%s  Bullets: %d", super.getInfo(), this.bullets);
+        return "Sniper";
     }
+
+    @Override
+    public void step() {
+        System.out.println("Snipers step");
+    }
+
+    
+
 }
