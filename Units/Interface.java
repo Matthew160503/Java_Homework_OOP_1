@@ -1,8 +1,10 @@
 package Units;
 
-public interface Interface {
+import java.util.ArrayList;
 
-    void step();
+public interface Interface {
     
     String getInfo();
+
+    void step(ArrayList<BaseHero> otherTeam,ArrayList<BaseHero> ourTeam);
 }
