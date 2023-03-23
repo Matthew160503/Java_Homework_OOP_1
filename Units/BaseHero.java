@@ -12,6 +12,7 @@ public abstract class BaseHero implements Interface{
     protected int maxHp;
     protected int damage;
     protected int speed;
+    protected Position position;
 
     static {
         BaseHero.number = 0;
@@ -23,12 +24,13 @@ public abstract class BaseHero implements Interface{
  * @param hp Жизни персонажа
  * @param damage Урон персонажа
  */    
-    public BaseHero(String name, int hp, int damage, int speed) {
+    public BaseHero(String name, int hp, int damage, int speed, int x, int y) {
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
         this.damage = damage;
         this.speed = speed;
+        position = new Position(x, y); 
     }
 
     @Override
@@ -73,5 +75,6 @@ public abstract class BaseHero implements Interface{
             System.out.printf("%s убит\n", this.name); 
         }
     }
+
 
 }

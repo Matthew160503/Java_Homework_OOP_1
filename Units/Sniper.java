@@ -1,48 +1,25 @@
 package Units;
 
-import java.util.ArrayList;
+public class Sniper extends Shooter{
 
-public class Sniper extends BaseHero{
+    private int X;
+    private int Y;
 
-    private int bullets;
-    private int maxBullets;
-
-    public Sniper() {
+    public Sniper(int x, int y) {
         super(String.format("Sniper #%d", ++Sniper.number),
-                15, 12, 9);
-        this.maxBullets = 32;
-        this.bullets = maxBullets;
+                15, 12, 9, 32, x, y);
+        this.X = x;
+        this.Y = y;
     }
     
     @Override
     public String getInfo() {
-        return String.format("Name: %s  Hp: %d  Damage: %d  Type: %s  Speed: %d  Bullets: %d",
-        this.name, this.hp, this.damage, this.getClass().getSimpleName(), this.speed, bullets);
+        return String.format("Name: %s  Hp: %d  Damage: %d  Type: %s  Speed: %d  Arrows: %d  Coordinates(x,y): %d, %d",
+        this.name, this.hp, this.damage, this.getClass().getSimpleName(), this.speed, arrows, this.X, this.Y);
     }
 
     @Override
-    public void step(ArrayList<BaseHero> otherTeam, ArrayList<BaseHero> ourTeam) {
-        if(this.bullets > 0 && this.hp > 0){
-            System.out.println("Снайпер может стрелять");
-            for (BaseHero hero : otherTeam){
-                if(hero.hp >  0){
-                    attack(hero, this.damage);
-                    this.bullets --;
-                    break;
-                }
-            }
-
-            for(BaseHero hero : ourTeam){
-                if (hero.getInfo().equals("Peasant")){
-                    this.bullets++;
-                    System.out.printf("Снайперу добавлена патрона.Теперь всего патрон: %d\n",this.bullets);
-                    break;
-                }
-            }
-        }
-        else System.out.println("Снайпер умер или не имеет стрел");
+    public String toString() {
+        return "Sniper";
     }
-
-    
-
 }

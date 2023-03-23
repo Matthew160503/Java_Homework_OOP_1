@@ -5,40 +5,41 @@ import java.util.Random;
 import Units.*;
 
 public class Main{
+    public static final int UNITS = 10;
     public static void main(String[] args) {
         ArrayList<BaseHero> team1 = new ArrayList<>();
         ArrayList<BaseHero> team2 = new ArrayList<>();
         ArrayList<BaseHero> fullStack = new ArrayList<>();
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < UNITS; i++){
             switch(new Random().nextInt(4)){
                 case 0:
-                    team1.add(new Crossbowman());
+                    team1.add(new Crossbowman(1,i+1));
                     break;
                 case 1:
-                    team1.add(new Magician());
+                    team1.add(new Magician(1,i+1));
                     break;
                 case 2:
-                    team1.add(new Robber());
+                    team1.add(new Robber(1,i+1));
                     break;
                 default:
-                    team1.add(new Peasant());
+                    team1.add(new Peasant(1,i+1));
                     break;
 
             }
 
             switch(new Random().nextInt(4)){
                 case 0:
-                    team2.add(new Sniper());
+                    team2.add(new Sniper(10, i+1));
                     break;
                 case 1:
-                    team2.add(new Monk());
+                    team2.add(new Monk(10, i+1));
                     break;
                 case 2:
-                    team2.add(new Spearman());
+                    team2.add(new Spearman(10, i+1));
                     break;
                 default:
-                    team2.add(new Peasant());
+                    team2.add(new Peasant(10, i+1));
                     break;
 
             }
