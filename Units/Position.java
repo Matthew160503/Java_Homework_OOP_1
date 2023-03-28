@@ -8,7 +8,14 @@ public class Position {
         this.y = y;
     }
 
-    public double getDistance(BaseHero unit){
-        return Math.sqrt(Math.pow(x-unit.position.x,2) + Math.pow(y-unit.position.y, 2));
+    public boolean isEquals(Position opposit){
+        if(opposit.y == y && opposit.x == x) return true;
+        return false;
+    }
+
+    public float getDistance(BaseHero target){
+        float dx = x- target.position.x;
+        float dy = y - target.position.y;
+        return (float)Math.sqrt(dx * dx + dy * dy);
     }
 }

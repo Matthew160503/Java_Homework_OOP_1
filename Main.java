@@ -1,72 +1,88 @@
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Scanner;
 
 import Units.*;
 
 public class Main{
-    public static final int UNITS = 10;
+
+    public static final int GANG_SIZE = 10;
+
+    public static ArrayList<BaseHero> whiteSide;
+
+    public static ArrayList<BaseHero> darkSide;
+
+    public static ArrayList<BaseHero> fullStack;
     public static void main(String[] args) {
-        ArrayList<BaseHero> team1 = new ArrayList<>();
-        ArrayList<BaseHero> team2 = new ArrayList<>();
-        ArrayList<BaseHero> fullStack = new ArrayList<>();
+        init();
 
-        for(int i = 0; i < UNITS; i++){
+
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            ConsoleView.view();
+            makeStep();
+            sc.nextLine();
+        }
+    }
+
+    private static void init(){
+        whiteSide = new ArrayList<>();
+        darkSide = new ArrayList<>();
+        fullStack = new ArrayList<>();
+
+        int x = 1;
+        int y = 1;
+        for (int i = 0; i < GANG_SIZE; i++) {
             switch(new Random().nextInt(4)){
-                case 0:
-                    team1.add(new Crossbowman(1,i+1));
-                    break;
-                case 1:
-                    team1.add(new Magician(1,i+1));
-                    break;
-                case 2:
-                    team1.add(new Robber(1,i+1));
-                    break;
-                default:
-                    team1.add(new Peasant(1,i+1));
-                    break;
-
-            }
-
-            switch(new Random().nextInt(4)){
-                case 0:
-                    team2.add(new Sniper(10, i+1));
-                    break;
-                case 1:
-                    team2.add(new Monk(10, i+1));
-                    break;
-                case 2:
-                    team2.add(new Spearman(10, i+1));
-                    break;
-                default:
-                    team2.add(new Peasant(10, i+1));
-                    break;
-
+                case 0: whiteSide.add(new Peasant(whiteSide, x, y++, GANG_SIZE)); break;
+                case 1: whiteSide.add(new Crossbowman(whiteSide, x, y++, GANG_SIZE)); break;
+                case 2: whiteSide.add(new Monk(whiteSide, x, y++, GANG_SIZE)); break;
+                default: whiteSide.add(new Spearman(whiteSide, x, y++, GANG_SIZE)); break;
             }
         }
 
-        fullStack.addAll(team1);
-        fullStack.addAll(team2);
+        x = GANG_SIZE;
+        y = 1;
 
-        fullStack.sort(new Comparator<BaseHero>(){
-            @Override
-            public int compare(BaseHero h1, BaseHero h2){
-                if (h1.getSpeed() == h2.getSpeed()) return 0;
-                else if (h1.getSpeed() > h2.getSpeed()) return 1;
-                else return -1;
+        for (int i = 0; i < GANG_SIZE; i++) {
+            switch(new Random().nextInt(4)){
+                case 0: darkSide.add(new Peasant(darkSide, x, y++, GANG_SIZE)); break;
+                case 1: darkSide.add(new Sniper(darkSide, x, y++, GANG_SIZE)); break;
+                case 2: darkSide.add(new Magician(darkSide, x, y++, GANG_SIZE)); break;
+                default: darkSide.add(new Robber(darkSide, x, y++, GANG_SIZE)); break;
             }
-        });
+        }
 
-        System.out.println("\nTeam1:");
-        for(BaseHero hero1: team1) System.out.println(hero1.getName());
-        System.out.println("\nTeam2:");
-        for(BaseHero hero2: team2) System.out.println(hero2.getName());
+        fullStack.addAll(whiteSide);
+        fullStack.addAll(darkSide);
+    }
+    
+    private static void makeStep(){
+        HashSet<Integer> speedRates = new HashSet<>();
+        for (BaseHero hero : fullStack){
+            speedRates.add(hero.getSpeed());
+        }
 
-        System.out.println("\nвся информация про героев:");
-        for(BaseHero hero : fullStack) System.out.println(hero.getInfo());
-        System.out.println("\n");
-        
-        team1.forEach(u -> u.step(team2, team1));
-        
+        ArrayList<Integer> speeds = new ArrayList<>(speedRates);
+        Collections.sort(speeds, Collections.reverseOrder());
+
+        for (int speed : speeds){
+            ArrayList<BaseHero> speedArray = new ArrayList<>();
+            for(BaseHero unit : fullStack){
+                if(unit.getSpeed() == speed){
+                    speedArray.add(unit);
+                }
+            }
+            Collections.shuffle(speedArray);
+            for (BaseHero hero : speedArray){
+                if (hero.name.equals(darkSide)){
+                    hero.step(whiteSide, darkSide);
+                } else{
+                    hero.step(darkSide, whiteSide);
+                }
+            }
+        }
     }
 }
